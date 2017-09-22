@@ -1,9 +1,10 @@
 import random
+import math
 
 # config
 low = 1
-high = 10
-limit = 4
+high = 100
+limit = math.ceil(math.log(high - low + 1 , 2))
 
 # helper functions
 def show_start_screen():
@@ -13,9 +14,13 @@ def show_start_screen():
     print(" | | |_ | | | |/ _ \/ __/ __|   / /\ \   | . ` | | | | '_ ` _ \| '_ \ / _ \ '__|  ")
     print(" | |__| | |_| |  __/\__ \__ \  / ____ \  | |\  | |_| | | | | | | |_) |  __/ |     ")
     print("  \_____|\__,_|\___||___/___/ /_/    \_\ |_| \_|\__,_|_| |_| |_|_.__/ \___|_|     ")  
+    print()
+    print()
 
 def show_credits():
     print("This awesome game was created by")
+    print()
+    print()
     print("$$\      $$\                     $$\                           $$$$$$$$\                            $$\                                $$\                         ") 
     print("$$ | $\  $$ |                    $$ |                          $$  _____|                           $$ |                               $$ |                        ") 
     print("$$ |$$$\ $$ | $$$$$$\   $$$$$$$\ $$ | $$$$$$\  $$\   $$\       $$ |    $$$$$$\   $$$$$$\   $$$$$$$\ $$$$$$$\  $$\  $$\  $$\  $$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\  ") 
@@ -39,25 +44,96 @@ def get_guess():
             print("You must enter a number.")
 
 def pick_number():
+    print()
+    print()
+    print()
     print("I'm thinking of a number from " + str(low) + " to " + str(high) +".")
+    print()
+    print("You will have " + str(limit) + " attempts to guess the number.")
+    print()
 
     return random.randint(low, high)
 
 def check_guess(guess, rand):
     if guess < rand:
         print("You guessed too low.")
+        print()
     elif guess > rand:
         print("You guessed too high.")
+        print()
 
 def show_result(guess, rand):
     if guess == rand:
         print("You win!")
+        print()                                                      
+        print("       *****                           *****       ")    
+        print("    *****(***,,,,,,,,,,,,,,,,,,,,,,,,,***(*****    ")    
+        print("   ***       ,,,,,,,,,,,,,,,,,,,,,,,,,        ***  ")    
+        print("  ***  **   *,,,,,,,,,,,,,,,,,,,,,,,,,    **   **  ")    
+        print("  **   ******,,,,,,,,,,,,,,,,,,,,,,,,,******   *** ")    
+        print("  **          ,,,,,,,,     ,,,,,,,,,,          **  ")    
+        print("  ***         ,,,,,,,, ,   ,,,,,,,,,,         ***  ")    
+        print("   **         ,,,,,,,,,,   ,,,,,,,,,,        ***   ")    
+        print("    **         ,,,,,,,,,   ,,,,,,,,,        ***    ")    
+        print("     ***       ,,,,,,,,,   ,,,,,,,,,      ****     ")    
+        print("      ****     (,,,,,,,,   ,,,,,,,,(    ****       ")    
+        print("        ****    ,,,,,,,,,,,,,,,,,,,   ****         ")    
+        print("           ***** ,,,,,,,,,,,,,,,,,*****            ")    
+        print("              ****,,,,,,,,,,,,,,,***               ")    
+        print("                   ,,,,,,,,,,,,,                   ")    
+        print("                     ,,,,,,,,,                     ")    
+        print("                       *****                       ")    
+        print("                       *****                       ")    
+        print("                        ***                        ")    
+        print("                        ***                        ")    
+        print("                       ,,,,,                       ")    
+        print("                    ,,,,,,,,,,,                    ")    
+        print("                   ,,,,,,,,,,,,,                   ")    
+        print("                 #################                 ")    
+        print("                 #################                 ")    
+        print("                 ##.............##                 ")    
+        print("                 #################                 ")    
+        print("                 #################                 ")
+        print()
     else:
         print("You are such a loser! The number was " + str(rand) + ".")
+        print()
+        print("                                     @@@@@@@@@@@@@@@@@,    ")        
+        print("                      %@@@@@@@@@@@@@@@@@@@@@@@@@@,         ")
+        print("    (@@@@@@@@@@@@@@@@@@@@@@@@@@@,          .@@@@@@@        ")
+        print("  @@@@@@@@@@@@@@@@@@@@@@%                      @@@@@       ")
+        print("  @@@@@@@@@@@@@@@@#                            ,@@@@       ")
+        print("  @@@@,    @@@@@                                @@@@*      ")
+        print("  @@@@@   *@@@@@                                @@@@@&     ")
+        print("  @@@@@@@@@@@@@@                                 %@@@@     ")
+        print("   @@@@@@@@@@@@@@                                  @@@@(   ") 
+        print("  @@@@@@@@@@@@@@                                 *@@@@#    ")
+        print("  @@@@@@@@@@@@@@                                  @@@@@    ")
+        print("  @@@@@@@@@@@@@@                                   @@@@@   ")
+        print("  @@@@@@@@@@@@@@                                   @@@@@   ")
+        print("  @@@@@@@@@@@@@@                                  @@@@@@   ")
+        print("  @@@@@@@@@@@@@@                                   .@@@@@  ")
+        print("  @@@@@@@@@@@@@@                                    %@@@@  ")
+        print("  @@@@@@@@@@@@@@@@&                                 ,@@@@  ")
+        print("   @@@@@@@@@@@@@@@@@@                              .@@@@@  ")
+        print("                #@@@@@@            @@@@@@@@@@@@@@@@@@@@@   ")
+        print("                  @@@@@@.          .@@@@@@@@@@@@@@@@@@     ")
+        print("                    @@@@@@          @@@@@@@@@@@@@@@        ")
+        print("                     .@@@@@#         @@@@@                 ")
+        print("                       @@@@@@         @@@@@                ")
+        print("                        @@@@@        .@@@@                 ")
+        print("                         @@@@@        @@@@                 ")
+        print("                           @@@@       ,@@@@                ")
+        print("                           @@@@@      @@@@@                ")
+        print("                           (@@@@&  .@@@@@@                 ")
+        print("                            &@@@@@@@@@@@@                  ")
+        print()
 
 def play_again():
     while True:
         decision = input("Would you like to play again? (y/n) ")
+        decision = decision.lower()
+        print()
 
         if decision == 'y' or decision == 'yes':
             return True
@@ -65,6 +141,7 @@ def play_again():
             return False
         else:
             print("I don't understand. Please enter 'y' or 'n'.")
+            print()
 
 def play():
     guess = -1
