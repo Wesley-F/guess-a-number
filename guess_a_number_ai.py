@@ -1,8 +1,13 @@
+"""
+Guess a Number A.I
+Wesley F
+"""
+
 import random
 
 # config
 low = 1
-high = 1000
+high = 100
 
 
 # helper functions
@@ -13,22 +18,23 @@ def show_start_screen():
     print(" | | |_ | | | |/ _ \/ __/ __|  / _` | | . ` | | | | '_ ` _ \| '_ \ / _ \ '__|   / /\ \     | |    ")
     print(" | |__| | |_| |  __/\__ \__ \ | (_| | | |\  | |_| | | | | | | |_) |  __/ |     / ____ \ _ _| |_ _ ")
     print("  \_____|\__,_|\___||___/___/  \__,_| |_| \_|\__,_|_| |_| |_|_.__/ \___|_|    /_/    \_(_)_____(_)")
+    print()
+
                                                                                                                                                                                                   
 def show_credits():
-    print("This awesome game was created by")
+    print("This awesome game was created by")                                                            
+    print("     _ _ _         _                                                 ")
+    print("    | | | |___ ___| |___ _ _                                         ")
+    print("    | | | | -_|_ -| | -_| | |                                        ")
+    print("    |_____|___|___|_|___|_  |                                        ")
+    print("                        |___|                                        ")
+    print("                                                                     ")
+    print("     _____     _       _              ___       _    ___ ___ ___ ___ ")
+    print("    |     |___| |_ ___| |_ ___ ___   |_  |___ _| |  |_  |   |_  |_  |")
+    print("    |  |  |  _|  _| . | . | -_|  _|  |  _|   | . |  |  _| | |_| |_| |")
+    print("    |_____|___|_| |___|___|___|_|    |___|_|_|___|  |___|___|_____|_|")
     print()
-    print()
-    print("$$\      $$\                     $$\                           $$$$$$$$\                            $$\                                $$\                         ") 
-    print("$$ | $\  $$ |                    $$ |                          $$  _____|                           $$ |                               $$ |                        ") 
-    print("$$ |$$$\ $$ | $$$$$$\   $$$$$$$\ $$ | $$$$$$\  $$\   $$\       $$ |    $$$$$$\   $$$$$$\   $$$$$$$\ $$$$$$$\  $$\  $$\  $$\  $$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\  ") 
-    print("$$ $$ $$\$$ |$$  __$$\ $$  _____|$$ |$$  __$$\ $$ |  $$ |      $$$$$\ $$  __$$\ $$  __$$\ $$  _____|$$  __$$\ $$ | $$ | $$ | \____$$\\_$$  _|  $$  __$$\ $$  __$$\ ")
-    print("$$$$  _$$$$ |$$$$$$$$ |\$$$$$$\  $$ |$$$$$$$$ |$$ |  $$ |      $$  __|$$ |  \__|$$$$$$$$ |\$$$$$$\  $$ |  $$ |$$ | $$ | $$ | $$$$$$$ | $$ |    $$$$$$$$ |$$ |  \__|")
-    print("$$$  / \$$$ |$$   ____| \____$$\ $$ |$$   ____|$$ |  $$ |      $$ |   $$ |      $$   ____| \____$$\ $$ |  $$ |$$ | $$ | $$ |$$  __$$ | $$ |$$\ $$   ____|$$ |      ") 
-    print("$$  /   \$$ |\$$$$$$$\ $$$$$$$  |$$ |\$$$$$$$\ \$$$$$$$ |      $$ |   $$ |      \$$$$$$$\ $$$$$$$  |$$ |  $$ |\$$$$$\$$$$  |\$$$$$$$ | \$$$$  |\$$$$$$$\ $$ |      ") 
-    print("\__/     \__| \_______|\_______/ \__| \_______| \____$$ |      \__|   \__|       \_______|\_______/ \__|  \__| \_____\____/  \_______|  \____/  \_______|\__|      ") 
-    print("                                               $$\   $$ |                                                                                                          ") 
-    print("                                               \$$$$$$  |                                                                                                          ") 
-    print("                                                \______/                                                                                                           ") 
+
     
 def get_guess(current_low, current_high):
     """
@@ -36,13 +42,16 @@ def get_guess(current_low, current_high):
     """
     return (current_low + current_high) // 2
 
+
 def pick_number():
     """
     Ask the player to think of a number between low and high.
     Then  wait until the player presses enter.
     """
     input("Think a number between " + str(low) + " and " + str(high) + " and then press enter.")
-                   
+    print()
+
+    
 def check_guess(guess):
     """
     Computer will ask if guess was too high, low, or correct.
@@ -52,12 +61,15 @@ def check_guess(guess):
              1 if the guess was too high
     """
     print (str(guess))
-    check_number = input("Is this number too high, too low or is it your number? (High, Low, Correct)")
-    if check_number == "Correct":
+    print()
+    check_number = input("Is this number too high, too low or is it your number? (higher, lower, correct)")
+    print()
+    
+    if check_number.lower() == "correct" or check_number.lower() == "c":
         return 0
-    elif check_number == "High":
+    elif check_number.lower() == "higher" or check_number.lower() == "h":
         return 1
-    elif check_number == "Low":
+    elif check_number.lower() == "lower" or check_number.lower() == "l":
         return -1
         
     
@@ -66,10 +78,13 @@ def show_result():
     Says the result of the game. (The computer might always win.)
     """
     print("I got your number!")
+    print()
+    
 
 def play_again():
     while True:
         decision = input("Would you like to play again? (y/n) ")
+        print()
 
         if decision == 'y' or decision == 'yes':
             return True
@@ -77,6 +92,8 @@ def play_again():
             return False
         else:
             print("I don't understand. Please enter 'y' or 'n'.")
+            print()
+            
 
 def play():
     current_low = low
