@@ -4,10 +4,13 @@ Wesley F
 """
 
 import random
+import math
 
 # config
 low = 1
 high = 100
+limit = math.ceil(math.log(high - low + 2 , 2))
+tries = 0
 
 
 # helper functions
@@ -48,7 +51,7 @@ def pick_number():
     Ask the player to think of a number between low and high.
     Then  wait until the player presses enter.
     """
-    input("Think a number between " + str(low) + " and " + str(high) + " and then press enter.")
+    input("Think a number between " + str(low) + " and " + str(high) + " and then press enter. I will have " + str(limit) + " tries to guess your number.")
     print()
 
     
@@ -60,7 +63,7 @@ def check_guess(guess):
              0 if the guess was correct
              1 if the guess was too high
     """
-    print (str(guess))
+    print ("Guess number " + str(tries + 1) + " out of " + str(limit) + ": " + str(guess))
     print()
     check_number = input("Is this number too high, too low or is it your number? (higher, lower, correct)")
     print()
@@ -68,8 +71,10 @@ def check_guess(guess):
     if check_number.lower() == "correct" or check_number.lower() == "c":
         return 0
     elif check_number.lower() == "higher" or check_number.lower() == "h":
+        tries + 1
         return 1
     elif check_number.lower() == "lower" or check_number.lower() == "l":
+        tries + 1
         return -1
         
     
@@ -102,7 +107,7 @@ def play():
     
     pick_number()
     
-    while check != 0:
+    while check != 0 and tries < limit:
         guess = get_guess(current_low, current_high)
         check = check_guess(guess)
 
@@ -113,7 +118,9 @@ def play():
             # adjust current_high
             current_high = guess - 1
 
-    show_result()
+        
+
+
 
 
 # Game starts running here
