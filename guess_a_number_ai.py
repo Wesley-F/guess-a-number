@@ -10,7 +10,6 @@ import math
 low = 1
 high = 100
 limit = math.ceil(math.log(high - low + 2 , 2))
-tries = 0
 
 
 # helper functions
@@ -55,7 +54,7 @@ def pick_number():
     print()
 
     
-def check_guess(guess):
+def check_guess(guess, tries):
     """
     Computer will ask if guess was too high, low, or correct.
 
@@ -65,16 +64,14 @@ def check_guess(guess):
     """
     print ("Guess number " + str(tries + 1) + " out of " + str(limit) + ": " + str(guess))
     print()
-    check_number = input("Is this number too high, too low or is it your number? (higher, lower, correct)")
+    check_number = input("Is this number too high, too low or is it your number? (high, low, correct)")
     print()
     
     if check_number.lower() == "correct" or check_number.lower() == "c":
         return 0
-    elif check_number.lower() == "higher" or check_number.lower() == "h":
-        tries + 1
+    elif check_number.lower() == "high" or check_number.lower() == "h":
         return 1
-    elif check_number.lower() == "lower" or check_number.lower() == "l":
-        tries + 1
+    elif check_number.lower() == "low" or check_number.lower() == "l":
         return -1
         
     
@@ -104,12 +101,13 @@ def play():
     current_low = low
     current_high = high
     check = -1
-    
+    tries = 0
+
     pick_number()
     
     while check != 0 and tries < limit:
         guess = get_guess(current_low, current_high)
-        check = check_guess(guess)
+        check = check_guess(guess, tries)
 
         if check == -1:
             # adjust current_low
@@ -117,7 +115,7 @@ def play():
         elif check == 1:
             # adjust current_high
             current_high = guess - 1
-
+        tries += 1
         
 
 
