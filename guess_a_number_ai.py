@@ -6,11 +6,6 @@ Wesley F
 import random
 import math
 
-# config
-low = 1
-high = 100
-limit = math.ceil(math.log(high - low + 2 , 2))
-
 
 # helper functions
 def show_start_screen():
@@ -50,8 +45,14 @@ def pick_number():
     Ask the player to think of a number between low and high.
     Then  wait until the player presses enter.
     """
-    input("Think a number between " + str(low) + " and " + str(high) + " and then press enter. I will have " + str(limit) + " tries to guess your number.")
+    current_low = input("Pick the lowest number I could guess.")
     print()
+    current_high = input("Pick the highest number I could guess.")
+    print()
+    input("Think a number between " + str(current_low) + " and " + str(current_high) + " and then press enter. I will have " + str(limit) + " tries to guess your number.")
+    print()
+
+    return current_low, current_high
 
     
 def check_guess(guess, tries):
@@ -62,24 +63,28 @@ def check_guess(guess, tries):
              0 if the guess was correct
              1 if the guess was too high
     """
-    print ("Guess number " + str(tries + 1) + " out of " + str(limit) + ": " + str(guess))
-    print()
-    check_number = input("Is this number too high, too low or is it your number? (high, low, correct)")
-    print()
-    
-    if check_number.lower() == "correct" or check_number.lower() == "c":
-        return 0
-    elif check_number.lower() == "high" or check_number.lower() == "h":
-        return 1
-    elif check_number.lower() == "low" or check_number.lower() == "l":
-        return -1
+    while True:
+        print ("Guess number " + str(tries + 1) + " out of " + str(limit) + ": " + str(guess))
+        print()
+        check_number = input("Is this number too high, too low or is it your number? (high, low, correct)")
+        print()
+        
+        if check_number.lower() == "correct" or check_number.lower() == "c":
+            return 0
+        elif check_number.lower() == "high" or check_number.lower() == "h":
+            return 1
+        elif check_number.lower() == "low" or check_number.lower() == "l":
+            return -1
+        else:
+            print("I do not understand. Please try again.")
+            print()
         
     
-def show_result():
+def show_result(tries):
     """
     Says the result of the game. (The computer might always win.)
     """
-    print("I got your number!")
+    print("I got your number in " + str(tries) + " tries!")
     print()
     
 
@@ -98,12 +103,12 @@ def play_again():
             
 
 def play():
-    current_low = low
-    current_high = high
     check = -1
     tries = 0
 
-    pick_number()
+    current_low, current_high = pick_number()
+    
+    limit = math.ceil(math.log(current_high - current_low + 2 , 2))
     
     while check != 0 and tries < limit:
         guess = get_guess(current_low, current_high)
@@ -117,7 +122,7 @@ def play():
             current_high = guess - 1
         tries += 1
         
-
+    show_result(tries)
 
 
 
