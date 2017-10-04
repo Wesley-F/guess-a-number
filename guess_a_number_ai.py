@@ -39,23 +39,25 @@ def get_guess(current_low, current_high):
     """
     return (current_low + current_high) // 2
 
+def get_range():
+    current_low = int(input("Pick the lowest number I could guess."))
+    print()
+    current_high = int(input("Pick the highest number I could guess."))
+    print()
+    
+    return current_low, current_high
 
-def pick_number():
+
+def pick_number(current_high, current_low, limit):
     """
     Ask the player to think of a number between low and high.
     Then  wait until the player presses enter.
     """
-    current_low = input("Pick the lowest number I could guess.")
-    print()
-    current_high = input("Pick the highest number I could guess.")
-    print()
     input("Think a number between " + str(current_low) + " and " + str(current_high) + " and then press enter. I will have " + str(limit) + " tries to guess your number.")
     print()
-
-    return current_low, current_high
-
     
-def check_guess(guess, tries):
+    
+def check_guess(guess, tries, limit):
     """
     Computer will ask if guess was too high, low, or correct.
 
@@ -64,7 +66,7 @@ def check_guess(guess, tries):
              1 if the guess was too high
     """
     while True:
-        print ("Guess number " + str(tries + 1) + " out of " + str(limit) + ": " + str(guess))
+        print("Guess number " + str(tries + 1) + " out of " + str(limit) + ": " + str(guess))
         print()
         check_number = input("Is this number too high, too low or is it your number? (high, low, correct)")
         print()
@@ -106,13 +108,19 @@ def play():
     check = -1
     tries = 0
 
-    current_low, current_high = pick_number()
+    current_low, current_high = get_range()
     
     limit = math.ceil(math.log(current_high - current_low + 2 , 2))
+
+    pick_number(current_high, current_low, limit)
     
     while check != 0 and tries < limit:
         guess = get_guess(current_low, current_high)
-        check = check_guess(guess, tries)
+        check = check_guess(guess, tries, limit)
+
+    if current_low > current_high:
+        print("I think you made a mistake.")
+        print()
 
         if check == -1:
             # adjust current_low
