@@ -82,11 +82,14 @@ def check_guess(guess, tries, limit):
             print()
         
     
-def show_result(tries):
+def show_result(tries, check, limit):
     """
     Says the result of the game. (The computer might always win.)
     """
-    print("I got your number in " + str(tries) + " tries!")
+    if check != 0 and tries == limit:
+        print("I think you made a mistake somewhere.")
+    else:    
+        print("I got your number in " + str(tries) + " tries!")
     print()
     
 
@@ -118,10 +121,6 @@ def play():
         guess = get_guess(current_low, current_high)
         check = check_guess(guess, tries, limit)
 
-    if current_low > current_high:
-        print("I think you made a mistake.")
-        print()
-
         if check == -1:
             # adjust current_low
             current_low = guess + 1
@@ -130,7 +129,7 @@ def play():
             current_high = guess - 1
         tries += 1
         
-    show_result(tries)
+    show_result(tries, check, limit)
 
 
 
